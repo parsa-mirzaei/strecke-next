@@ -1,9 +1,14 @@
 // Generated at build time. Precache the app shell; serve it cache-first; works offline.
-const CACHE = 'strecke-next-05cbdef498';
-const PRECACHE = ["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png","icon-512-maskable.png","./assets/index-VSJfzAVF.js","./assets/barlow-latin-400-normal-qiz4-Cze.woff2","./assets/barlow-latin-500-normal-BPAOfeC8.woff2","./assets/barlow-latin-600-normal-DILqtrty.woff2","./assets/barlow-semi-condensed-latin-500-normal-G0uxJNrM.woff2","./assets/barlow-semi-condensed-latin-600-normal-BkLiAYu4.woff2","./assets/barlow-semi-condensed-latin-700-normal-BpqDG8I9.woff2","./assets/index-BXHl2jaJ.css"];
+const CACHE = 'strecke-next-a2baab5828';
+const PRECACHE = ["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png","icon-512-maskable.png","./assets/index-BZ4GFboI.js","./assets/barlow-latin-400-normal-qiz4-Cze.woff2","./assets/barlow-latin-500-normal-BPAOfeC8.woff2","./assets/barlow-latin-600-normal-DILqtrty.woff2","./assets/barlow-semi-condensed-latin-500-normal-G0uxJNrM.woff2","./assets/barlow-semi-condensed-latin-600-normal-BkLiAYu4.woff2","./assets/barlow-semi-condensed-latin-700-normal-BpqDG8I9.woff2","./assets/index-Df1kjO5z.css"];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting()));
+  // No skipWaiting here: an update waits until the page asks (a tap, or app start), never mid-run.
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)));
+});
+
+self.addEventListener('message', (e) => {
+  if (e.data === 'skipWaiting') self.skipWaiting();
 });
 
 self.addEventListener('activate', (e) => {
